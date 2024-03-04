@@ -1,20 +1,21 @@
 import heapq
 
-def single_byte_xor(hex_bytes, key):
+def single_byte_xor(bytes, key):
     if len(key) > 1:
         raise ValueError("key must be single byte")
     
-    return xor(hex_bytes, key * len(hex_bytes))
+    return xor(bytes, key * len(bytes))
 
-def xor(hexbytes1, hexbytes2):
-    if len(hexbytes1) != len(hexbytes2):
-        raise ValueError("hex bytes must be equal length")
+def xor(bytes1, bytes2):
+    if len(bytes1) != len(bytes2):
+        raise ValueError("both bytes must be equal length")
     
-    return bytes(x^y for x,y in zip(hexbytes1, hexbytes2))
+    return bytes(x^y for x,y in zip(bytes1, bytes2))
 
 def character_frequency(text):
     return { char: text.count(char) for char in text }
 
+# map the number of occurrences of test chars within cipher bytes encrypted with each possible single byte xor key
 def single_byte_xor_frequency_analysis(cipher_bytes, test_chars='etaoinshrdlu'):
     possible_plaintexts = {}
     # xor ciphertext bytes with single byte key

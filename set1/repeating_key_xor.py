@@ -1,6 +1,6 @@
 def xor(bytes1, bytes2):
     if len(bytes1) != len(bytes2):
-        raise ValueError("hex bytes must be equal length")
+        raise ValueError("both bytes must be equal length")
     
     return bytes(x^y for x,y in zip(bytes1, bytes2))
 

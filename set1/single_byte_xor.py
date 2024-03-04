@@ -1,16 +1,16 @@
 COMMON_CHARS = 'etaoinshrdlu'
 
-def single_byte_xor(hex_bytes, key):
+def single_byte_xor(bytes, key):
     if len(key) > 1:
         raise ValueError("key must be single byte")
     
-    return xor(hex_bytes, key * len(hex_bytes))
+    return xor(bytes, key * len(bytes))
 
-def xor(hexbytes1, hexbytes2):
-    if len(hexbytes1) != len(hexbytes2):
-        raise ValueError("hex bytes must be equal length")
+def xor(bytes1, bytes2):
+    if len(bytes1) != len(bytes2):
+        raise ValueError("both bytes must be equal length")
     
-    return bytes(x^y for x,y in zip(hexbytes1, hexbytes2))
+    return bytes(x^y for x,y in zip(bytes1, bytes2))
 
 def character_frequency(text):
     return { char: text.count(char) for char in text }
@@ -28,7 +28,7 @@ if __name__=='__main__':
             char_freq = character_frequency(possible_plaintext)
             common_char_freqs = sum([char_freq.get(char,0) for char in COMMON_CHARS])
 
-            # theory: the secret is the possible plaintext with the most common english chars
+            # theory: the secret is the possible plaintext with the most occurrences of common english chars
             if common_char_freqs > max_common_char_freqs:
                 max_common_char_freqs = common_char_freqs
                 plaintext = possible_plaintext
